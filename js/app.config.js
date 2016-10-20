@@ -13,6 +13,14 @@ angular.module('AuthApp')
         templateUrl: 'templates/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/about', {
+        templateUrl: 'templates/about.html',
+        controller: 'AboutCtrl'
+      })
+      .when('/contact', {
+        templateUrl: 'templates/contact.html',
+        controller: 'ContactCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       })
