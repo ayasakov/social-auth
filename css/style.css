@@ -1,3 +1,27 @@
 .navbar {
     border-radius: 0;
 }
+
+/* Home block */
+
+.home {
+    width: 100%;
+    display: block;
+}
+
+.home .user-info {
+    width: 75px;
+    height: 75px;
+    display: inline-block;
+}
+
+.home .comment-block {
+    width: calc(100% - 79px);
+    display: inline-block;
+}
+
+.comment-block textarea {
+    resize: none;
+    min-height: 75px;
+    width: 100%;
+}

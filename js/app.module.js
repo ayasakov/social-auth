@@ -4,9 +4,9 @@ angular.module('AuthApp', ['ngRoute'])
   .controller('HomeCtrl', ['$scope', function ($scope) {
     $scope.title = 'Home page';
   }])
-  .controller('NavCtrl', ['$scope', '$location', function ($scope, $location) {
+  .controller('NavCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
     $scope.isAuthorization = false;
-    $scope.profileImage = 'images/not-available.jpg';
+    $rootScope.profileImage = 'images/not-available.jpg';
 
     // Authorization via VK OpenAPI
     $scope.authVK = function () {
@@ -19,8 +19,9 @@ angular.module('AuthApp', ['ngRoute'])
 
       VK.Auth.login(function(response) {
         if (response.status == 'connected') {
-          $scope.firstName = response.session.user.first_name;
-          $scope.secondName = response.session.user.last_name;
+          $rootScope.firstName = response.session.user.first_name;
+          $rootScope.secondName = response.session.user.last_name;
+          $rootScope.url = response.session.user.href;
           $scope.uid = response.session.user.id;
 
           // Get profile's photo
@@ -33,7 +34,7 @@ angular.module('AuthApp', ['ngRoute'])
             var image = _.first(obj.response);
             if (image) {
               $scope.$apply(function() {
-                $scope.profileImage = image.src_small;
+                $rootScope.profileImage = image.src_small;
               });
             }
           });
