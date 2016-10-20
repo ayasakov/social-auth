@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- VK OpenAPI -->
+  <script src="https://vk.com/js/api/openapi.js?133" type="text/javascript"></script>
+
   <title>Social Auth app</title>
 </head>
 <body>
@@ -32,15 +35,14 @@
           <li ng-class="{ 'active': isActive('/about')}"><a href="/about">About</a></li>
           <li ng-class="{ 'active': isActive('/contact')}"><a href="/contact">Contact</a></li>
         </ul>
-        <form class="navbar-form navbar-right">
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="username" placeholder="Username">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control" ng-model="password" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-default" ng-click="auth(username, password)">Log In</button>
+
+        <form class="navbar-form navbar-right" ng-hide="isAuthorization">
+          <button type="submit" class="btn btn-default" ng-click="authVK()"><i class="fa fa-vk" aria-hidden="true"></i></button>
         </form>
+        <p class="navbar-text navbar-right" ng-show="isAuthorization">
+          Вы вошли как, <a href="#" class="navbar-link">{{ firstName }} {{ secondName }}</a>
+          <img ng-src="{{ profileImage }}" style="height: 22px;" />
+        </p>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
@@ -49,6 +51,7 @@
     <ng-view></ng-view>
   </div>
 
+  <script src="node_modules/underscore/underscore.js"></script>
   <script src="node_modules/angular/angular.js"></script>
   <script src="node_modules/angular-route/angular-route.js"></script>
   <script src="node_modules/angular-resource/angular-resource.js"></script>

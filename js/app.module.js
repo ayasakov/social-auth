@@ -5,17 +5,44 @@ angular.module('AuthApp', ['ngRoute'])
     $scope.title = 'Home page';
   }])
   .controller('NavCtrl', ['$scope', '$location', function ($scope, $location) {
-    $scope.isAuthorization = function () {
-      return false;
-    };
+    $scope.isAuthorization = false;
+    $scope.profileImage = 'images/not-available.jpg';
 
-    $scope.auth = function (username, password) {
-      $scope.username = '';
-      $scope.password = '';
+    // Authorization via VK OpenAPI
+    $scope.authVK = function () {
+      // App ID
+      var appId = 0; /* input your appId here */
 
-      // VK auth will be here
+      VK.init({
+        apiId: appId
+      });
 
-      console.log(username, password);
+      VK.Auth.login(function(response) {
+        if (response.status == 'connected') {
+          $scope.firstName = response.session.user.first_name;
+          $scope.secondName = response.session.user.last_name;
+          $scope.uid = response.session.user.id;
+
+          // Get profile's photo
+          VK.Api.call('photos.get', {
+            owner_id: $scope.uid,
+            album_id: 'profile',
+            rev: 1,
+            count: 1
+          }, function (obj) {
+            var image = _.first(obj.response);
+            if (image) {
+              $scope.$apply(function() {
+                $scope.profileImage = image.src_small;
+              });
+            }
+          });
+
+          $scope.$apply(function() {
+            $scope.isAuthorization = true;
+          });
+        }
+      });
     };
 
     $scope.isActive = function (viewLocation) {
