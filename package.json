@@ -23,6 +23,7 @@
     "angular-animate": "^1.5.8",
     "angular-resource": "^1.5.8",
     "angular-route": "^1.5.8",
+    "angular-timeago": "^0.4.3",
     "bootstrap": "^3.3.7",
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.1",

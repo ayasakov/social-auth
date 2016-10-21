@@ -7,14 +7,14 @@
         <div class="widget-area no-padding blank">
           <div class="status-upload">
             <form>
-              <textarea placeholder="Ваш комментарий" ></textarea>
+              <textarea placeholder="Ваш комментарий" ng-model="commentText"></textarea>
               <ul>
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
               </ul>
-              <button type="submit" class="btn btn-success green"><i class="fa fa-share"></i> Отправить </button>
+              <button type="submit" class="btn btn-success green" ng-disabled="!isAuthorization" ng-click="addComment(url, profileImage, commentText, firstName + ' ' + secondName)"><i class="fa fa-share"></i> Отправить </button>
             </form>
           </div><!-- Status Upload  -->
         </div><!-- Widget Area -->
@@ -27,78 +27,42 @@
 		<h1>Комментарии</h1>
 
 		<ul id="comments-list" class="comments-list">
-			<li>
+			<li ng-repeat="comment in comments">
 				<div class="comment-main-level">
 					<!-- Avatar -->
-					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+					<div class="comment-avatar"><img ng-src="{{ comment.userpic }}" alt=""></div>
 					<!-- Contenedor del Comentario -->
 					<div class="comment-box">
 						<div class="comment-head">
-							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Вася Пупкин</a></h6>
-							<span>20 минут назад</span>
+							<h6 class="comment-name by-author"><a href="{{ comment.url }}">{{ comment.name }}</a></h6>
+							<span><time>{{ comment.date |timeAgo }}</time></span>
 							<i class="fa fa-reply"></i>
 							<i class="fa fa-heart"></i>
 						</div>
 						<div class="comment-content">
-							Сдержанная улыбка, игравшая постоянно на лице Анны Павловны, хотя и не шла к ее отжившим чертам, выражала, как у избалованных детей, постоянное сознание своего милого недостатка, от которого она не хочет, не может и не находит нужным исправляться.
+							{{ comment.text }}
 						</div>
 					</div>
 				</div>
 				<!-- Respuestas de los comentarios -->
 				<ul class="comments-list reply-list">
-					<li>
+					<li ng-repeat="child in comment.children">
 						<!-- Avatar -->
-						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
+						<div class="comment-avatar"><img ng-src="{{ child.userpic }}" alt=""></div>
 						<!-- Contenedor del Comentario -->
 						<div class="comment-box">
 							<div class="comment-head">
-								<h6 class="comment-name"><a href="http://creaticode.com/blog">Иван Иванов</a></h6>
-								<span>10 минут назад</span>
+								<h6 class="comment-name"><a href="{{ child.url }}">{{ child.name }}</a></h6>
+								<span><time>{{ child.date |timeAgo }}</time></span>
 								<i class="fa fa-reply"></i>
 								<i class="fa fa-heart"></i>
 							</div>
 							<div class="comment-content">
-								Сдержанная улыбка, игравшая постоянно на лице Анны Павловны, хотя и не шла к ее отжившим чертам, выражала, как у избалованных детей, постоянное сознание своего милого недостатка, от которого она не хочет, не может и не находит нужным исправляться.
-							</div>
-						</div>
-					</li>
-
-					<li>
-						<!-- Avatar -->
-						<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-						<!-- Contenedor del Comentario -->
-						<div class="comment-box">
-							<div class="comment-head">
-								<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Вася Пупкин</a></h6>
-								<span>9 минут назад</span>
-								<i class="fa fa-reply"></i>
-								<i class="fa fa-heart"></i>
-							</div>
-							<div class="comment-content">
-								Сдержанная улыбка, игравшая постоянно на лице Анны Павловны, хотя и не шла к ее отжившим чертам, выражала, как у избалованных детей, постоянное сознание своего милого недостатка, от которого она не хочет, не может и не находит нужным исправляться.
+								{{ child.text }}
 							</div>
 						</div>
 					</li>
 				</ul>
-			</li>
-
-			<li>
-				<div class="comment-main-level">
-					<!-- Avatar -->
-					<div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-					<!-- Contenedor del Comentario -->
-					<div class="comment-box">
-						<div class="comment-head">
-							<h6 class="comment-name"><a href="http://creaticode.com/blog">Иван Иванов</a></h6>
-							<span>5 минут назад</span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
-						</div>
-						<div class="comment-content">
-							Сдержанная улыбка, игравшая постоянно на лице Анны Павловны, хотя и не шла к ее отжившим чертам, выражала, как у избалованных детей, постоянное сознание своего милого недостатка, от которого она не хочет, не может и не находит нужным исправляться.
-						</div>
-					</div>
-				</div>
 			</li>
 		</ul>
 	</div>

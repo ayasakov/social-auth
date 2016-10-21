@@ -1,12 +1,80 @@
 "use strict";
 
-angular.module('AuthApp', ['ngRoute'])
+angular.module('AuthApp', ['ngRoute', 'yaru22.angular-timeago'])
   .controller('HomeCtrl', ['$scope', function ($scope) {
     $scope.title = 'Home page';
     $("[data-toggle=tooltip]").tooltip();
+
+    var text = "Сдержанная улыбка, игравшая постоянно на лице Анны Павловны, хотя и не шла к ее отжившим чертам, выражала, как у избалованных детей, постоянное сознание своего милого недостатка, от которого она не хочет, не может и не находит нужным исправляться."
+    $scope.comments = [
+      {
+        id: 1,
+        name: "Вася Пупкин",
+        userpic: "http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg",
+        url: "http://creaticode.com/blog",
+        text: text,
+        like: 0,
+        dislike: 0,
+        date: new Date('2016-09-21T12:05:22.464Z'),
+        children: [
+          {
+            id: 2,
+            name: "Иван Иванов",
+            userpic: "http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg",
+            url: "http://creaticode.com/blog",
+            text: text,
+            like: 0,
+            dislike: 0,
+            date: new Date('2016-10-21T12:05:22.464Z'),
+            children: []
+          },
+          {
+            id: 3,
+            name: "Вася Пупкин",
+            userpic: "http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg",
+            url: "http://creaticode.com/blog",
+            text: text,
+            like: 0,
+            dislike: 0,
+            date: new Date(),
+            children: []
+          }
+        ]
+      },
+      {
+        id: 4,
+        name: "Иван Иванов",
+        userpic: "http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg",
+        url: "http://creaticode.com/blog",
+        text: text,
+        like: 0,
+        dislike: 0,
+        date: new Date(),
+        children: []
+      }
+    ];
+
+    $scope.addComment = function (url, userpic, text, name) {
+      var id = $scope.comments.length + 3;
+      var newComment = {
+        id: id,
+        name: name,
+        userpic: userpic,
+        url: url,
+        text: text,
+        like: 0,
+        dislike: 0,
+        date: new Date(),
+        children: []
+      };
+      $scope.commentText = '';
+      $scope.comments.push(newComment);
+
+    };
+
   }])
   .controller('NavCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
-    $scope.isAuthorization = false;
+    $rootScope.isAuthorization = false;
     $rootScope.profileImage = 'images/not-available.jpg';
 
     // Authorization via VK OpenAPI
@@ -41,7 +109,7 @@ angular.module('AuthApp', ['ngRoute'])
           });
 
           $scope.$apply(function() {
-            $scope.isAuthorization = true;
+            $rootScope.isAuthorization = true;
           });
         }
       });
