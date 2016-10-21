@@ -3,6 +3,7 @@
 angular.module('AuthApp', ['ngRoute'])
   .controller('HomeCtrl', ['$scope', function ($scope) {
     $scope.title = 'Home page';
+    $("[data-toggle=tooltip]").tooltip();
   }])
   .controller('NavCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
     $scope.isAuthorization = false;
@@ -11,7 +12,7 @@ angular.module('AuthApp', ['ngRoute'])
     // Authorization via VK OpenAPI
     $scope.authVK = function () {
       // App ID
-      var appId = 0; /* input your appId here */
+      var appId = 5676328; /* input your appId here */
 
       VK.init({
         apiId: appId
