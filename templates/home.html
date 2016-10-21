@@ -14,7 +14,7 @@
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
               </ul>
-              <button type="submit" class="btn btn-success green" ng-disabled="!isAuthorization" ng-click="addComment(url, profileImage, commentText, firstName + ' ' + secondName)"><i class="fa fa-share"></i> Отправить </button>
+              <button type="submit" class="btn btn-success green" ng-disabled="!isAuthorization" ng-click="addComment(url, profileImage, commentText, firstName + ' ' + secondName); commentText = ''"><i class="fa fa-share"></i> Отправить </button>
             </form>
           </div><!-- Status Upload  -->
         </div><!-- Widget Area -->
@@ -27,42 +27,7 @@
 		<h1>Комментарии</h1>
 
 		<ul id="comments-list" class="comments-list">
-			<li ng-repeat="comment in comments">
-				<div class="comment-main-level">
-					<!-- Avatar -->
-					<div class="comment-avatar"><img ng-src="{{ comment.userpic }}" alt=""></div>
-					<!-- Contenedor del Comentario -->
-					<div class="comment-box">
-						<div class="comment-head">
-							<h6 class="comment-name by-author"><a href="{{ comment.url }}">{{ comment.name }}</a></h6>
-							<span><time>{{ comment.date |timeAgo }}</time></span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
-						</div>
-						<div class="comment-content">
-							{{ comment.text }}
-						</div>
-					</div>
-				</div>
-				<!-- Respuestas de los comentarios -->
-				<ul class="comments-list reply-list">
-					<li ng-repeat="child in comment.children">
-						<!-- Avatar -->
-						<div class="comment-avatar"><img ng-src="{{ child.userpic }}" alt=""></div>
-						<!-- Contenedor del Comentario -->
-						<div class="comment-box">
-							<div class="comment-head">
-								<h6 class="comment-name"><a href="{{ child.url }}">{{ child.name }}</a></h6>
-								<span><time>{{ child.date |timeAgo }}</time></span>
-								<i class="fa fa-reply"></i>
-								<i class="fa fa-heart"></i>
-							</div>
-							<div class="comment-content">
-								{{ child.text }}
-							</div>
-						</div>
-					</li>
-				</ul>
+			<li ng-repeat="comment in comments" ng-include="'templates/comments.html'">
 			</li>
 		</ul>
 	</div>

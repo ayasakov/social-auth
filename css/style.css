@@ -239,6 +239,30 @@ body {
 	-webkit-border-radius: 0 0 4px 4px;
 	-moz-border-radius: 0 0 4px 4px;
 	border-radius: 0 0 4px 4px;
+	overflow: hidden;
+}
+
+.comment-content textarea {
+	background: none repeat scroll 0 0 #fff;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    -ms-border-radius: 4px 4px 0 0;
+    -o-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+    color: #777777;
+    float: left;
+    font-size: 14px;
+    height: 50px;
+    letter-spacing: 0.3px;
+    width: 100%;
+    resize: vertical;
+    outline: none;
+    border: 0;
+}
+
+.comment-content button {
+	float: right;
+	margin-top: 10px;
 }
 
 .comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}

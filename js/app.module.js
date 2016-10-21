@@ -67,10 +67,28 @@ angular.module('AuthApp', ['ngRoute', 'yaru22.angular-timeago'])
         date: new Date(),
         children: []
       };
-      $scope.commentText = '';
       $scope.comments.push(newComment);
-
     };
+    
+    $scope.addReply = function (url, userpic, text, name, parrent) {
+      var newComment = {
+        name: name,
+        userpic: userpic,
+        url: url,
+        text: text,
+        like: 0,
+        dislike: 0,
+        date: new Date()
+      };
+
+      var obj = _.findWhere($scope.comments, {id: parrent});
+      obj.children.push(newComment);
+    }
+
+    $scope.showReply = false;
+    $scope.changeReply = function () {
+      $scope.showReply = !$scope.showReply;
+    }
 
   }])
   .controller('NavCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {

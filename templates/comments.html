@@ -1,0 +1,56 @@
+<div class="comment-main-level">
+    <!-- Avatar -->
+    <div class="comment-avatar"><img ng-src="{{ comment.userpic }}" alt=""></div>
+    <!-- Contenedor del Comentario -->
+    <div class="comment-box">
+        <div class="comment-head">
+            <h6 class="comment-name by-author"><a href="{{ comment.url }}">{{ comment.name }}</a></h6>
+            <span><time>{{ comment.date |timeAgo }}</time></span>
+            <i class="fa fa-reply"></i>
+            <i class="fa fa-heart"></i>
+        </div>
+        <div class="comment-content">
+            {{ comment.text }}
+        </div>
+    </div>
+</div>
+<!-- Respuestas de los comentarios -->
+<ul class="comments-list reply-list">
+    <li ng-repeat="child in comment.children">
+        <!-- Avatar -->
+        <div class="comment-avatar"><img ng-src="{{ child.userpic }}" alt=""></div>
+        <!-- Contenedor del Comentario -->
+        <div class="comment-box">
+            <div class="comment-head">
+                <h6 class="comment-name"><a href="{{ child.url }}">{{ child.name }}</a></h6>
+                <span><time>{{ child.date | timeAgo }}</time></span>
+                <i class="fa fa-reply" ng-click="changeReply()"></i>
+                <i class="fa fa-heart"></i>
+            </div>
+            <div class="comment-content">
+                {{ child.text }}
+            </div>
+        </div>
+    </li>
+    <li ng-show="showReply">
+        <!-- Avatar -->
+        <div class="comment-avatar"><img ng-src="{{ profileImage }}" alt="{{ firstName }} {{ secondName }}"></div>
+        <!-- Contenedor del Comentario -->
+        <div class="comment-box">
+            <div class="comment-head">
+                <h6 class="comment-name"><a href="{{ url }}">{{ firstName }} {{ secondName }}</a></h6>
+            </div>
+            <div class="comment-content">
+                <form>
+                    <textarea placeholder="Ваш комментарий" ng-model="replyText"></textarea>
+                    <button type="submit" class="btn btn-success green"
+                            ng-disabled="!isAuthorization"
+                            ng-click="addReply(url, profileImage, replyText, firstName + ' ' + secondName, comment.id); replyText = ''">
+                        <i class="fa fa-share"></i>
+                        Отправить
+                    </button>
+                </form>
+            </div>
+        </div>
+    </li>
+</ul>
