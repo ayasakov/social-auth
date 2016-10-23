@@ -9,3 +9,10 @@ Deploy social-auth on local machine for development.
 
 ### Run project
 > npm start
+
+### Run REST API server
+> mkvirtualenv socauth
+
+> pip install -r requirements.txt
+
+> ./manage.py runserver 
