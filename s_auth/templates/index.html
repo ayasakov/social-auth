@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en" ng-app="AuthApp">
 <head>
   <base href="/">
   <meta charset="UTF-8">
 
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.css">
+  <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
   <!-- VK OpenAPI -->
   <script src="https://vk.com/js/api/openapi.js?133" type="text/javascript"></script>
@@ -15,7 +16,7 @@
   <title>Social Auth app</title>
 </head>
 <body ng-controller="MainController">
-
+  {% verbatim %}
   <nav class="navbar navbar-inverse" ng-controller="NavCtrl">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -52,18 +53,19 @@
     <ng-view></ng-view>
   </div>
 
-  <script src="node_modules/underscore/underscore.js"></script>
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-  <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="node_modules/angular/angular.js"></script>
-  <script src="node_modules/angular-timeago/dist/angular-timeago-core.min.js"></script>
-  <script src="node_modules/angular-timeago/src/languages/time-ago-language-en_US.js"></script>
-  <script src="node_modules/angular-route/angular-route.js"></script>
-  <script src="node_modules/angular-resource/angular-resource.js"></script>
+  {% endverbatim %}
+  <script src="{% static 'underscore/underscore.js' %}"></script>
+  <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+  <script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
+  <script src="{% static 'angular/angular.js' %}"></script>
+  <script src="{% static 'angular-timeago/dist/angular-timeago.min.js' %}"></script>
+  <script src="{% static 'angular-timeago/src/languages/time-ago-language-en_US.js' %}"></script>
+  <script src="{% static 'angular-route/angular-route.js' %}"></script>
+  <script src="{% static 'angular-resource/angular-resource.js' %}"></script>
 
-  <script src="js/app.module.js"></script>
-  <script src="js/app.config.js"></script>
-  <script src="js/app.factory.js"></script>
-  <script src="js/app.controllers.js"></script>
+  <script src="{% static 'js/app.module.js' %}"></script>
+  <script src="{% static 'js/app.config.js' %}"></script>
+  <script src="{% static 'js/app.factory.js' %}"></script>
+  <script src="{% static 'js/app.controllers.js' %}"></script>
 </body>
 </html>

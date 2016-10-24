@@ -1,3 +1,4 @@
+{% verbatim %}
 <div class="comment-main-level">
     <!-- Avatar -->
     <div class="comment-avatar"><img ng-src="{{ comment.userpic }}" alt=""></div>
@@ -16,7 +17,7 @@
 </div>
 <!-- Respuestas de los comentarios -->
 <ul class="comments-list reply-list">
-    <li ng-repeat="child in comment.children">
+    <li ng-repeat="child_id in comment.children" ng-init="child = getReplyById(child_id)">
         <!-- Avatar -->
         <div class="comment-avatar"><img ng-src="{{ child.userpic }}" alt=""></div>
         <!-- Contenedor del Comentario -->
@@ -54,3 +55,4 @@
         </div>
     </li>
 </ul>
+{% endverbatim %}

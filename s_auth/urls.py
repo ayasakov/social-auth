@@ -33,4 +33,13 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
+    url(r'^includes/about.html$',
+        TemplateView.as_view(template_name="includes/about.html")),
+    url(r'^includes/comments.html$',
+        TemplateView.as_view(template_name="includes/comments.html")),
+    url(r'^includes/contact.html$',
+        TemplateView.as_view(template_name="includes/contact.html")),
+    url(r'^includes/home.html$',
+        TemplateView.as_view(template_name="includes/home.html")),
+    url(r'^', TemplateView.as_view(template_name="index.html")),
 ]

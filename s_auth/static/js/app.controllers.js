@@ -4,22 +4,27 @@ angular.module('AuthApp')
   .controller('MainController', ['$scope', function ($scope) {
 
   }])
-  .controller('HomeCtrl', ['$scope', 'Comments', function ($scope, Comments) {
+  .controller('HomeCtrl', ['$scope', 'Comments', 'Reply', function ($scope, Comments, Reply) {
     $scope.title = 'Home page';
     $("[data-toggle=tooltip]").tooltip();
 
-    $scope.count = 0;
     $scope.comments = [];
+    $scope.reply = [];
 
-    Comments.get(function (data) {
-      $scope.count = data.count;
-      $scope.comments = data.comments;
+    Comments.query(function (data) {
+      $scope.comments = data;
     });
 
+    Reply.query(function (data) {
+      $scope.reply = data;
+    });
+
+    $scope.getReplyById = function (id) {
+      return _.findWhere($scope.reply, {id: id});
+    };
+
     $scope.addComment = function (url, userpic, text, name) {
-      var id = $scope.comments.length + 3;
       var newComment = {
-        id: id,
         name: name,
         userpic: userpic,
         url: url,
@@ -30,7 +35,7 @@ angular.module('AuthApp')
         children: []
       };
       $scope.comments.push(newComment);
-      Comments.save({count: $scope.count, comments: $scope.comments});
+      Comments.save(newComment);
     };
 
     $scope.addReply = function (url, userpic, text, name, parrent) {
@@ -56,7 +61,7 @@ angular.module('AuthApp')
   }])
   .controller('NavCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
     $rootScope.isAuthorization = false;
-    $rootScope.profileImage = 'images/not-available.jpg';
+    $rootScope.profileImage = '/static/images/not-available.jpg';
 
     // Authorization via VK OpenAPI
     $scope.authVK = function () {

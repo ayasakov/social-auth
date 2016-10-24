@@ -10,15 +10,15 @@ angular.module('AuthApp')
 
     $routeProvider
       .when('/', {
-        templateUrl: 'templates/home.html',
+        templateUrl: 'includes/home.html',
         controller: 'HomeCtrl'
       })
       .when('/about', {
-        templateUrl: 'templates/about.html',
+        templateUrl: 'includes/about.html',
         controller: 'AboutCtrl'
       })
       .when('/contact', {
-        templateUrl: 'templates/contact.html',
+        templateUrl: 'includes/contact.html',
         controller: 'ContactCtrl'
       })
       .otherwise({
